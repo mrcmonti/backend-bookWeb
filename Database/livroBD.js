@@ -7,8 +7,8 @@ export default class LivroBD {
     // verifica se livro é instancia de Livro, verifica conexao
     if (livro instanceof Livro) {
       const conexao = await conectar();
-      const sql = "INSERT INTO livro(titulo, autor, editora, genero, dataPublicacao, numPaginas)VALUES(?,?,?,?,?,?)";
-      const valores = [livro.titulo, livro.autor, livro.editora, livro.genero, livro.dataPublicacao, livro.numPaginas];
+      const sql = "INSERT INTO livro(titulo, cod_autor, editora, genero, dataPublicacao, numPaginas)VALUES(?,?,?,?,?,?)";
+      const valores = [livro.titulo, livro.cod_autor, livro.editora, livro.genero, livro.dataPublicacao, livro.numPaginas];
       const resultado = await conexao.query(sql, valores);
       return await resultado[0].insertId;
       // retorna o cod gerado pelo banco de dados qdo a coluna for auto incremento
@@ -18,12 +18,12 @@ export default class LivroBD {
     if (livro instanceof Livro) {
       const conexao = await conectar();
       const sql =
-        "UPDATE livro SET titulo=?, autor=?, editora=?, genero=?, dataPublicacao=?, numPaginas=?\
+        "UPDATE livro SET titulo=?, cod_autor=?, editora=?, genero=?, dataPublicacao=?, numPaginas=?\
                                             WHERE cod_livro=?";
       //codigo é a chave primaria
       const valores = [
         livro.titulo,
-        livro.autor,
+        livro.cod_autor,
         livro.editora,
         livro.genero,
         livro.dataPublicacao,
@@ -38,7 +38,7 @@ export default class LivroBD {
       const conexao = await conectar();
       const sql = "DELETE FROM livro WHERE(cod_livro=?)";
 
-      const valores = [livro.codigo];
+      const valores = [livro.cod_livro];
       await conexao.query(sql, valores);
     }
   }
@@ -52,7 +52,7 @@ export default class LivroBD {
       const livro = new Livro(
         row["cod_livro"],
         row["titulo"],
-        row["autor"],
+        row["cod_autor"],
         row["editora"],
         row["genero"],
         row["dataPublicacao"],
@@ -76,7 +76,7 @@ export default class LivroBD {
       const livro = new Livro(
         row["cod_livro"],
         row["titulo"],
-        row["autor"],
+        row["cod_autor"],
         row["editora"],
         row["genero"],
         row["dataPublicacao"],
@@ -86,10 +86,10 @@ export default class LivroBD {
     }
     return listaLivros;
   }
-  async consultarCodigo(codigo) {
+  async consultarCodigo(cod_livro) {
     const conexao = await conectar();
     const sql = "SELECT * FROM livro WHERE cod_livro = ?";
-    const valores = [codigo];
+    const valores = [cod_livro];
     // traz as linhas de informaçao
     const [rows] = await conexao.query(sql, valores);
     var livro = null;
@@ -97,7 +97,7 @@ export default class LivroBD {
       livro = new Livro(
         row["cod_livro"],
         row["titulo"],
-        row["autor"],
+        row["cod_autor"],
         row["editora"],
         row["genero"],
         row["dataPublicacao"],

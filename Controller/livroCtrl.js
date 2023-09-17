@@ -11,7 +11,7 @@ export default class LivroCTRL {
     if (requisicao.method === "POST" && requisicao.is("application/json")) {
       const dados = requisicao.body;
       const titulo = dados.titulo;
-      const autor = dados.autor;
+      const cod_autor = dados.cod_autor;
       const editora = dados.editora;
       const genero = dados.genero;
       const dataPublicacao = dados.dataPublicacao;
@@ -56,15 +56,15 @@ export default class LivroCTRL {
     resposta.type("application/json");
     if (requisicao.method === "PUT" && requisicao.is("application/json")) {
       const dados = requisicao.body;
-      const codigo = dados.codigo;
+      const cod_livro = dados.cod_livro;
       const titulo = dados.titulo;
-      const autor = dados.autor;
+      const cod_autor = dados.cod_autor;
       const editora = dados.editora;
       const genero = dados.genero;
       const dataPublicacao = dados.dataPublicacao;
       const numPaginas = dados.numPaginas;
-      if (codigo && titulo && editora && genero && dataPublicacao && numPaginas) {
-        const livro = new Livro(codigo, titulo, editora, genero, dataPublicacao, numPaginas);
+      if (cod_livro && titulo && editora && genero && dataPublicacao && numPaginas) {
+        const livro = new Livro(cod_livro, titulo, editora, genero, dataPublicacao, numPaginas);
 
         //chama metodo Assicrono atualizar que instanciua a camada de persistencia e altera o livro no banco
         livro
@@ -102,11 +102,11 @@ export default class LivroCTRL {
     resposta.type("application/json");
     if (requisicao.method === "DELETE" && requisicao.is("application/json")) {
       const dados = requisicao.body;
-      const codigo = dados.codigo;
+      const cod_livro = dados.cod_livro;
 
-      if (codigo) {
+      if (cod_livro) {
         // grava o livro
-        const livro = new Livro(codigo);
+        const livro = new Livro(cod_livro);
 
         //chama metodo Assicrono remover do banco que instanciua a camada de persistencia e remove o livro.
         livro
@@ -167,14 +167,14 @@ export default class LivroCTRL {
 
   consultarCodigo(requisicao, resposta) {
     resposta.type("application/json");
-    const codigo = requisicao.params["codigo"];
+    const cod_livro = requisicao.params["cod_livro"];
 
     if (requisicao.method === "GET") {
       const livro = new Livro();
 
       //chama metodo Assicrono que recupera os livros cadastrados no banco de dados
       livro
-        .consultarCodigo(codigo)
+        .consultarCodigo(cod_livro)
         .then((livro) => {
           resposta.status(200).json(livro);
         })

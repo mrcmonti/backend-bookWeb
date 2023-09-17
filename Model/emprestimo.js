@@ -16,10 +16,10 @@ export default class Emprestimo {
         this.#listaLivros = listaLivros;
     }
 
-    get codigo() {
+    get cod_emprestimo() {
         return this.#cod_emprestimo;
     }
-    set codigo(codigo) {
+    set cod_emprestimo(codigo) {
         this.#cod_emprestimo = codigo;
     }
 
@@ -37,12 +37,19 @@ export default class Emprestimo {
         this.#dataDevolucao = dataDevolucao;
     }
 
-    get cpf() {
+    get cpf_usuario() {
         return this.#cpf_usuario;
     }
 
-    set cpf(cpf) {
+    set cpf_usuario(cpf) {
         this.#cpf_usuario = cpf;
+    }
+
+    get listaLivros(){
+        return this.#listaLivros;
+    }
+    set listaLivros(lista){
+        this.#listaLivros = lista;
     }
 
     toJSON() {
@@ -61,15 +68,15 @@ export default class Emprestimo {
         this.#cod_emprestimo = await emprestimoBD.incluir(this);
     }
 
-    async atualizar(){
-        const emprestimoBD = new EmprestimoBD();
-        await emprestimoBD.alterar(this);
-    }
+    // async atualizar(){
+    //     const emprestimoBD = new EmprestimoBD();
+    //     await emprestimoBD.alterar(this);
+    // }
 
-    async removerDoBancoDados(){
-        const emprestimoBD = new EmprestimoBD();
-        await emprestimoBD.excluir(this);
-    }
+    // async removerDoBancoDados(){
+    //     const emprestimoBD = new EmprestimoBD();
+    //     await emprestimoBD.excluir(this);
+    // }
 
     async consultarTodos(){
         const emprestimoBD = new EmprestimoBD();

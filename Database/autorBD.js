@@ -16,7 +16,7 @@ export default class AutorBD {
     async alterar(autor) {
         if (autor instanceof Autor) {
             const conexao = await conectar();
-            const sql = "UPDATE autor SET nomeAutor =?, nacionalidade = ? WHERE codAutor = ?";
+            const sql = "UPDATE autor SET nomeAutor =?, nacionalidade = ? WHERE cod_autor = ?";
             const valores = [autor.nomeAutor, autor.nacionalidade, autor.codAutor];
             await conexao.query(sql, valores);
         }
@@ -24,7 +24,7 @@ export default class AutorBD {
     async excluir(autor) {
         if (usuario instanceof Autor) {
             const conexao = await conectar();
-            const sql = "DELETE FROM usuario WHERE(cpf=?)";
+            const sql = "DELETE FROM usuario WHERE(cod_autor=?)";
             const valores = [autor.cpf];
             await conexao.query(sql, valores);
         }
@@ -37,7 +37,7 @@ export default class AutorBD {
         const listaAutores = [];
         for (const row of rows) {
             const autor = new Autor(
-                row["codAutor"],
+                row["cod_autor"],
                 row["nomeAutor"],
                 row["nacionalidade"]
             );
@@ -55,7 +55,7 @@ export default class AutorBD {
         const listaAutores = [];
         for(const row of rows){
             const autor = new Autor(
-                row["codAutor"],
+                row["cod_autor"],
                 row["nomeAutor"],
                 row["nacionalidade"],
             );
@@ -67,13 +67,13 @@ export default class AutorBD {
 
     async consultarCodigo(codAutor){
         const conexao = await conectar();
-        const sql ="SELECT * FROM autor WHERE codAutor = ?";
+        const sql ="SELECT * FROM autor WHERE  cod_autor = ?";
         const valores = [codAutor];
         const [rows] = await conexao.query(sql, valores);
         const autor = null;
         for(const row of rows){
              autor = new Autor(
-                row["codAutor"],
+                row["cod_autor"],
                 row["nomeAutor"],
                 row["nacionalidade"],
             ).toJson();

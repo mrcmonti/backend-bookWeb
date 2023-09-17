@@ -1,9 +1,11 @@
 import { Router } from "express";
-import emprestimoCtrl from "../Controller/emprestimoCtrl.js";
+import EmprestimoCtrl from "../Controller/emprestimoCtrl.js";
 
-const rota = new Router();
-const ctrl = new emprestimoCtrl();
+const rotaEmprestimos = new Router();
+const emprestimoCtrl = new EmprestimoCtrl();
 
-rota.get('/', ctrl.consultarTodos);
+rotaEmprestimos
+    .post('/', emprestimoCtrl.gravar)
+    .get('/', emprestimoCtrl.consultarTodos)
 
-export default rota;
+export default rotaEmprestimos;

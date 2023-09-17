@@ -6,7 +6,7 @@ const livroCTRL = new LivroCTRL();
 
 rotaLivros
     .get('/', livroCTRL.consultar)
-    .get('/:codigo', livroCTRL.consultarCodigo)
+    .get('/:cod_livro', livroCTRL.consultarCodigo)
     .post('/', livroCTRL.gravar)
     .put('/', livroCTRL.atualizar)
     .delete('/', livroCTRL.excluir);

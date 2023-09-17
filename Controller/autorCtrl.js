@@ -37,10 +37,10 @@ export default class AutorCTRL {
         if (requisicao === "PUT" && requisicao.is("application/json")) {
             const dados = requisicao.body;
             const codAutor = dados.codAutor;
-            const nomeAutor = dados.nomeAutor;
+            const cod_autor = dados.cod_autor;
             const nacionalidade = dados.nacionalidade;
-            if (codAutor && nomeAutor && nacionalidade) {
-                const autor = new Autor(codAutor, nomeAutor, nacionalidade);
+            if (codAutor && cod_autor && nacionalidade) {
+                const autor = new Autor(codAutor, cod_autor, nacionalidade);
 
                 autor
                     .atualizar()

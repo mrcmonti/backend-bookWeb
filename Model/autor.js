@@ -2,20 +2,20 @@ import AutorBD from "../Database/autorBD.js";
 
 export default class Autor{
 
-    #codAutor;
+    #cod_autor;
     #nomeAutor;
     #nacionalidade;
 
-    constructor(codAutor, nomeAutor, nacionalidade){
-        this.#codAutor = codAutor;
+    constructor(cod_autor, nomeAutor, nacionalidade){
+        this.#cod_autor = cod_autor;
         this.#nomeAutor = nomeAutor;
         this.#nacionalidade = nacionalidade;
     }
-    get codAutor(){
-        return this.#codAutor;
+    get cod_autor(){
+        return this.#cod_autor;
     }
-    set codAutor(codAutor){
-        this.#codAutor = codAutor;
+    set cod_autor(cod_autor){
+        this.#cod_autor = cod_autor;
     }
     get nomeAutor(){
         return this.#nomeAutor;
@@ -29,16 +29,16 @@ export default class Autor{
     set nacionalidade(nacionalidade){
         this.#nacionalidade = nacionalidade;
     }
-    toJson(){
+    toJSON(){
         return{
-            "codAutor": this.#codAutor,
+            "cod_autor": this.#cod_autor,
             "NomeAutor": this.#nomeAutor,
             "nacionalidade": this.#nacionalidade
         }
     }
     async gravar(){
         const autorBD = new AutorBD();
-        this.codAutor = await autorBD.incluir(this);
+        this.cod_autor = await autorBD.incluir(this);
     }
 
     async atualizar(){

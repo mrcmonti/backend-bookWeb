@@ -3,7 +3,7 @@ import LivroBD from "../Database/livroBD.js";
 export default class Livro{
     #cod_livro; // # define que um atributo é privado
     #titulo;
-    #autor; 
+    #cod_autor; 
     #editora;
     #genero;
     #dataPublicacao;
@@ -11,10 +11,10 @@ export default class Livro{
     
 
     // metodo construtor que define informações necessarias para se criar objeto 
-    constructor(cod_livro, titulo, autor, editora, genero, dataPublicacao, numPaginas) {
+    constructor(cod_livro, titulo, cod_autor, editora, genero, dataPublicacao, numPaginas) {
         this.#cod_livro = cod_livro;
         this.#titulo = titulo;
-        this.#autor = autor;
+        this.#cod_autor = cod_autor;
         this.#editora = editora;
         this.#genero = genero;
         this.#dataPublicacao = dataPublicacao;
@@ -23,26 +23,26 @@ export default class Livro{
         
     // nos metodos get e set pode-se implementar regras de nogocios
     // metodos publicos get e set
-    get codigo(){
+    get cod_livro(){
         return this.#cod_livro;
     }
-    set codigo(novoCodigo){
+    set cod_livro(novoCodigo){
 
             this.#cod_livro = novoCodigo;
     }
     get titulo(){
         return this.#titulo;
     }
-    set titulo(novotitulo){
+    set titulo(titulo){
         if(novotitulo != "") // regra de negocio que impede que clientes existam com titulo vazio
-            this.#titulo = novotitulo;
+            this.#titulo = titulo;
     }
 
-    get autor(){
-        return this.#autor;
+    get cod_autor(){
+        return this.#cod_autor;
     }
-    set autor(novoAutor){
-        this.#autor = novoAutor;
+    set cod_autor(cod_autor){
+        this.#cod_autor = cod_autor;
     }
 
     get editora(){
@@ -73,9 +73,9 @@ export default class Livro{
     // override ou sobrescrita do metodo toJson
     toJSON(){
         return{
-            "codigo": this.#cod_livro,
+            "cod_livro": this.#cod_livro,
             "titulo": this.#titulo,
-            "autor": this.#autor,
+            "cod_autor": this.#cod_autor,
             "editora": this.#editora,
             "genero":this.#genero,
             "dataPublicacao":this.#dataPublicacao,
@@ -109,9 +109,9 @@ export default class Livro{
         return livro;
     }
 
-    async consultarCodigo(codigo){
+    async consultarCodigo(cod_livro){
         const livroBD = new LivroBD();
-        const livro = await livroBD.consultarCodigo(codigo);
+        const livro = await livroBD.consultarcod_livro(codigo);
         return livro;
 
     }
